@@ -270,8 +270,8 @@
           "install_wordpress" : {
             "packages" : {
               "yum" : {
-                "php73"          : [],
-                "php73-mysqlnd"  : [],
+                "php74"          : [],
+                "php74-mysqlnd"  : [],
                 "mysql57"        : [],
                 "mysql57-server" : [],
                 "mysql57-devel"  : [],
