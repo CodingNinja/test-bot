@@ -241,7 +241,7 @@
                 ]]},
                 "mode"  : "000400",
                 "owner" : "root",
-                "group" : "root"
+                "group" : "root2"
               },
               "/etc/cfn/hooks.d/cfn-auto-reloader.conf": {
                 "content": { "Fn::Join": [ "", [
