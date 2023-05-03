@@ -1,0 +1,6 @@
+entrypointDiscovery:
+- regex: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
+  files: true
+  context:
+    policies:
+    - test.test
