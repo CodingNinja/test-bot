@@ -5,6 +5,7 @@ entrypointDiscovery:
     policies:
     - test.test
 - regex: cdk/(?P<name>[^\/]+)
+  type: cdk
   context:
     policies:
     - test.test
