@@ -1,11 +1,21 @@
-variable "cidr" {
- default = "10.0.0.0/16"
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+      version = "3.5.1"
+    }
+  }
 }
-resource "aws_vpc" "main" {
- cidr_block       = var.cidr
- instance_tenancy = "default"
 
- tags = {
-   Name = "main"
- }
+provider "random" {
+  # Configuration options
+}
+
+resource "random_integer" "priority" {
+  min = 1
+  max = 50000
+  keepers = {
+    # Generate a new integer each time we switch to a new listener ARN
+    listener_arn = var.listener_arn
+  }
 }
