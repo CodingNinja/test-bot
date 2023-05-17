@@ -1,16 +1,11 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "4.67.0"
-    }
-  }
+variable "cidr" {
+ default = "10.0.0.0/16"
 }
-
-provider "aws" {
-  # Configuration options
-}
-
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+ cidr_block       = var.cidr
+ instance_tenancy = "default"
+
+ tags = {
+   Name = "main"
+ }
 }
