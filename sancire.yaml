@@ -1,3 +1,10 @@
+customPolicies:
+- policy: |
+    package foo.bar.baz
+    resource_change_types contains {"change_type": "custom.policy.change_type", "msg": "This comes from a policy in the user config"} if {
+      true
+    }
+  
 entrypointDiscovery:
 - regex: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
   files: true
