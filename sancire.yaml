@@ -1,8 +1,19 @@
 customPolicies:
 - policy: |
-    package foo.bar.baz
-    resource_change_types contains {"change_type": "custom.policy.change_type", "msg": "This comes from a policy in the user config"} if {
-      true
+    package custom_policy.bar.baz
+
+    # METADATA
+    # custom:
+    #   controls:
+    #   - FAKE.C1
+    resource_change_types[{"meta": rego.metadata.chain()}] {
+        print("running change type detection with custom inline policy")
+        true
+    }
+    
+    resource_change_types[{"change_type": "custom.change.type", "msg":"Application team custom change type enabling teams to implement custom application level approval"}] {
+        print("running change type detection with custom inline policy")
+        true
     }
   
 entrypointDiscovery:
