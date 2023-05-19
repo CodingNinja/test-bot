@@ -17,12 +17,12 @@ customPolicies:
     }
   
 entrypointDiscovery:
-- regex: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
+- path: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
   files: true
   context:
     policies:
     - test.test
-- regex: cdk/(?P<name>[^\/]+)
+- path: cdk/(?P<name>[^\/]+)
   type: cdk
   context:
     policies:
