@@ -1,4 +1,5 @@
 customPolicies:
+- remotePath: github.com/codingninja/test-bot.git//sancire/customPolicies
 - policy: |
     package custom_policy.bar.baz
 
