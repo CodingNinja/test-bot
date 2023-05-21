@@ -1,21 +1,22 @@
-customPolicies:
-- remotePath: github.com/codingninja/test-bot.git//sancire/customPolicies
-- policy: |
-    package custom_policy.bar.baz
+_refs:
+    customPolicies: &customPolicies
+    - remotePath: github.com/codingninja/test-bot.git//sancire/customPolicies
+    - policy: |
+        package custom_policy.bar.baz
 
-    # METADATA
-    # custom:
-    #   controls:
-    #   - FAKE.C1
-    resource_change_types[{"meta": rego.metadata.chain()}] {
-        print("running change type detection with custom inline policy")
-        true
-    }
-    
-    resource_change_types[{"change_type": "custom.change.type", "msg":"Application team custom change type enabling teams to implement custom application level approval"}] {
-        print("running change type detection with custom inline policy")
-        true
-    }
+        # METADATA
+        # custom:
+        #   controls:
+        #   - FAKE.C1
+        resource_change_types[{"meta": rego.metadata.chain()}] {
+            print("running change type detection with custom inline policy")
+            true
+        }
+
+        resource_change_types[{"change_type": "custom.change.type", "msg":"Application team custom change type enabling teams to implement custom application level approval"}] {
+            print("running change type detection with custom inline policy")
+            true
+        }
   
 entrypointDiscovery:
 - path: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
@@ -23,8 +24,13 @@ entrypointDiscovery:
   context:
     policies:
     - test.test
+    customPolicies: *customPolicies
 - path: cdk/(?P<name>[^\/]+)
   type: cdk
   context:
     policies:
     - test.test
+    customPolicies: *
+    
+    
+    
