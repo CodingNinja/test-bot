@@ -30,7 +30,7 @@ entrypointDiscovery:
   context:
     policies:
     - test.test
-    customPolicies: *
+    customPolicies: *customPolicies
     
     
     
