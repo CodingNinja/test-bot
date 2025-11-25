@@ -8,12 +8,15 @@ _refs:
         # custom:
         #   controls:
         #   - FAKE.C1
-        resource_change_types[{"meta": rego.metadata.chain()}] {
+        resource_change_types contains {"meta": rego.metadata.chain()} if {
             print("running change type detection with custom inline policy")
             true
         }
 
-        resource_change_types[{"change_type": "custom.change.type", "msg":"Application team custom change type enabling teams to implement custom application level approval"}] {
+        resource_change_types contains {
+            "change_type": "custom.change.type",
+            "msg":"Application team custom change type enabling teams to implement custom application level approval"
+        } if {
             print("running change type detection with custom inline policy")
             true
         }
