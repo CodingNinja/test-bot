@@ -22,18 +22,15 @@ _refs:
         }
   
 entrypointDiscovery:
-- path: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json)
+- path: (?P<type>[^/]+)/(?P<name>[^\.]+).(yaml|json|yml)
   files: true
-  context:
-    policies:
-    - test.test
-    customPolicies: *customPolicies
-- path: cdk/(?P<name>[^\/]+)
-  type: cdk
-  context:
-    policies:
-    - test.test
-    customPolicies: *customPolicies
-    
-    
-    
+  # context:
+  #   policies:
+  #   - test.test
+  #   customPolicies: *customPolicies
+# - path: cdk/(?P<name>[^\/]+)
+#   type: cdk
+#   context:
+#     policies:
+#     - test.test
+#     customPolicies: *customPolicies
