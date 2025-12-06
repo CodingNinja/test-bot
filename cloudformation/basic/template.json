@@ -219,6 +219,7 @@
         "GroupDescription" : "Enable HTTP access via port 80 locked down to the load balancer + SSH access",
         "SecurityGroupIngress" : [
           {"IpProtocol" : "tcp", "FromPort" : "8080", "ToPort" : "8080", "CidrIp" : "0.0.0.0/0"},
+          {"IpProtocol" : "tcp", "FromPort" : "8081", "ToPort" : "80", "CidrIp" : "0.0.0.0/0"},
           {"IpProtocol" : "tcp", "FromPort" : "22", "ToPort" : "22", "CidrIp" : { "Ref" : "SSHLocation"}}
         ]
       }
@@ -358,7 +359,7 @@
       },
       "CreationPolicy" : {
         "ResourceSignal" : {
-          "Timeout" : "PT15M"
+          "Timeout" : "PT20M"
         }
       }
     }
