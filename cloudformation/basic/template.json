@@ -5,13 +5,13 @@
 
   "Parameters" : {
 
-    "KeyName": {
+    "KeyName2": {
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instances",
       "Type": "AWS::EC2::KeyPair::KeyName",
       "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
     },
 
-    "InstanceType" : {
+    "InstanceType2" : {
       "Description" : "WebServer EC2 instance type",
       "Type" : "String",
       "Default" : "t2.medium",
@@ -213,7 +213,7 @@
   },
 
   "Resources" : {
-    "WebServerSecurityGroup" : {
+    "WebServerSecurityGroup2" : {
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
         "GroupDescription" : "Enable HTTP access via port 80 locked down to the load balancer + SSH access",
@@ -226,7 +226,7 @@
       }
     },
 
-    "WebServer": {
+    "WebServer1": {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
         "AWS::CloudFormation::Init" : {
@@ -338,23 +338,23 @@
       },
       "Properties": {
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
-                          { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] },
-        "InstanceType"   : { "Ref" : "InstanceType" },
-        "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
-        "KeyName"        : { "Ref" : "KeyName" },
+                          { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType2" }, "Arch" ] } ] },
+        "InstanceType"   : { "Ref" : "InstanceType2" },
+        "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup2"} ],
+        "KeyName"        : { "Ref" : "KeyName2" },
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
                        "#!/bin/bash -xe\n",
                        "yum update -y aws-cfn-bootstrap\n",
 
                        "/opt/aws/bin/cfn-init -v ",
                        "         --stack ", { "Ref" : "AWS::StackName" },
-                       "         --resource WebServer ",
+                       "         --resource WebServer1 ",
                        "         --configsets wordpress_install ",
                        "         --region ", { "Ref" : "AWS::Region" }, "\n",
 
                        "/opt/aws/bin/cfn-signal -e $? ",
                        "         --stack ", { "Ref" : "AWS::StackName" },
-                       "         --resource WebServer ",
+                       "         --resource WebServer1 ",
                        "         --region ", { "Ref" : "AWS::Region" }, "\n"
         ]]}}
       },
@@ -368,7 +368,7 @@
 
   "Outputs" : {
     "WebsiteURL" : {
-      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServer", "PublicDnsName" ]}, "/wordpress" ]]},
+      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServer1", "PublicDnsName" ]}, "/wordpress" ]]},
       "Description" : "WordPress Website"
     }
   }
